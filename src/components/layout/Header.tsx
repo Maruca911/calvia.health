@@ -14,6 +14,7 @@ export default function Header() {
     { label: 'Services', href: '/services' },
     { label: 'About', href: '/about' },
     { label: 'Blog', href: '/blog' },
+    { label: 'FAQ', href: '/faq' },
   ];
 
   const isTransparentHeader = isHome && !isScrolled && !mobileOpen;

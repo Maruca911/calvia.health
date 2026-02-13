@@ -10,6 +10,7 @@ const ThankYouPage = lazy(() => import('./pages/ThankYouPage'));
 const GetMatchedPage = lazy(() => import('./pages/GetMatchedPage'));
 const ServicesPage = lazy(() => import('./pages/ServicesPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
+const FAQPage = lazy(() => import('./pages/FAQPage'));
 
 function Loading() {
   return (
@@ -32,6 +33,7 @@ export default function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogPostPage />} />
+            <Route path="/faq" element={<FAQPage />} />
             <Route path="/thank-you" element={<ThankYouPage />} />
           </Routes>
         </Suspense>

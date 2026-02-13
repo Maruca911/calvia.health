@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
-import { FAQ_DATA } from '../../data/faqData';
+import { HOMEPAGE_FAQ_DATA } from '../../data/faqData';
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 
 export default function FAQSection() {
@@ -30,7 +30,7 @@ export default function FAQSection() {
         </div>
 
         <div className="max-w-3xl mx-auto">
-          {FAQ_DATA.map((item, i) => {
+          {HOMEPAGE_FAQ_DATA.map((item, i) => {
             const isOpen = openIndex === i;
             return (
               <div

@@ -21,23 +21,54 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@500;700;900&display=swap" rel="stylesheet" />
+    <meta property="og:image" content="https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg?auto=compress&cs=tinysrgb&w=1200" />
+    <meta name="twitter:image" content="https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg?auto=compress&cs=tinysrgb&w=1200" />
+    <link rel="alternate" hreflang="en" href="https://www.calvia.health/" />
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
+      "@type": "HealthAndBeautyBusiness",
       "name": "Calvia Health",
-      "description": "Trusted health service matching in Calvia, Mallorca. Connecting users to expert agencies for snoring, eyes, dentistry, pediatric care, spas, fitness, and more.",
+      "description": "Trusted health service matching in Calvia, Mallorca. Connecting tourists and residents to expert providers for medical care, dental, wellness, fitness, insurance, and more.",
       "url": "https://www.calvia.health",
-      "areaServed": {
-        "@type": "Place",
-        "name": "Calvia, Mallorca, Spain"
-      },
-      "serviceType": ["Health Service Matching", "Medical Referrals", "Wellness Connections"],
+      "logo": "https://www.calvia.health/favicon.svg",
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Calvia",
+          "containedInPlace": {
+            "@type": "AdministrativeArea",
+            "name": "Mallorca, Balearic Islands, Spain"
+          }
+        }
+      ],
+      "serviceType": ["Health Service Matching", "Medical Referrals", "Wellness Connections", "Health Insurance Guidance", "Dental Referrals", "Spa & Wellness Bookings"],
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Calvia",
-        "addressRegion": "Mallorca",
+        "addressRegion": "Illes Balears",
         "addressCountry": "ES"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "39.5653",
+        "longitude": "2.5099"
+      },
+      "sameAs": [],
+      "knowsLanguage": ["en", "es", "de"],
+      "priceRange": "Free matching service"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Calvia Health",
+      "url": "https://www.calvia.health",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.calvia.health/faq?q={search_term_string}",
+        "query-input": "required name=search_term_string"
       }
     }
     </script>

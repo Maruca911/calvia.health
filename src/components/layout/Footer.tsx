@@ -38,6 +38,7 @@ export default function Footer() {
               <li><Link to="/get-matched" className="text-sm text-text-grey hover:text-dark-teal transition-colors">Get Matched</Link></li>
               <li><Link to="/about" className="text-sm text-text-grey hover:text-dark-teal transition-colors">About Us</Link></li>
               <li><Link to="/blog" className="text-sm text-text-grey hover:text-dark-teal transition-colors">Blog</Link></li>
+              <li><Link to="/faq" className="text-sm text-text-grey hover:text-dark-teal transition-colors">FAQ</Link></li>
             </ul>
           </div>
 

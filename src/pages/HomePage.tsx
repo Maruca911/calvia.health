@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useSEO } from '../hooks/useSEO';
-import { FAQ_DATA } from '../data/faqData';
+import { HOMEPAGE_FAQ_DATA } from '../data/faqData';
 import Hero from '../components/sections/Hero';
 import TrustStrip from '../components/sections/TrustStrip';
 import HowItWorks from '../components/sections/HowItWorks';
@@ -15,7 +15,7 @@ export default function HomePage() {
     () => ({
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
-      mainEntity: FAQ_DATA.map((item) => ({
+      mainEntity: HOMEPAGE_FAQ_DATA.map((item) => ({
         '@type': 'Question',
         name: item.question,
         acceptedAnswer: {
