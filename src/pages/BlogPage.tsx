@@ -17,6 +17,7 @@ const CATEGORIES = [
 export default function BlogPage() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const activeCategory = searchParams.get('cat') || 'all';
 
@@ -39,7 +40,13 @@ export default function BlogPage() {
       query = query.eq('category', activeCategory);
     }
 
-    query.then(({ data }) => {
+    query.then(({ data, error: queryError }) => {
+      if (queryError) {
+        setError('Unable to load articles. Please try again later.');
+        console.error('Blog query error:', queryError.message);
+      } else {
+        setError(null);
+      }
       setPosts(data || []);
       setLoading(false);
     });
@@ -84,6 +91,13 @@ export default function BlogPage() {
         {loading ? (
           <div className="text-center py-20">
             <div className="w-8 h-8 border-2 border-sky-blue border-t-transparent rounded-full animate-spin mx-auto" />
+          </div>
+        ) : error ? (
+          <div className="text-center py-20">
+            <p className="text-red-600 mb-4">{error}</p>
+            <button onClick={() => window.location.reload()} className="btn-secondary text-sm">
+              Try Again
+            </button>
           </div>
         ) : posts.length === 0 ? (
           <div className="text-center py-20">

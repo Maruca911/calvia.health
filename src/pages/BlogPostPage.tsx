@@ -27,7 +27,10 @@ export default function BlogPostPage() {
       .eq('slug', slug)
       .eq('published', true)
       .maybeSingle()
-      .then(({ data }) => {
+      .then(({ data, error: queryError }) => {
+        if (queryError) {
+          console.error('Blog post query error:', queryError.message);
+        }
         setPost(data);
         setLoading(false);
 

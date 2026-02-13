@@ -56,7 +56,8 @@ export default function BlogPreview() {
       .from('blog_posts')
       .select('category')
       .eq('published', true)
-      .then(({ data }) => {
+      .then(({ data, error }) => {
+        if (error) console.error('BlogPreview query error:', error.message);
         if (!data) return;
         const grouped: Record<string, number> = {};
         (data as { category: string }[]).forEach((row) => {
