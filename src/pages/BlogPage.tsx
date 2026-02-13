@@ -20,9 +20,6 @@ const CATEGORIES = [
   { id: 'spa-hotels', label: 'Spas & Hotels' },
 ];
 
-const FALLBACK_NOTICE =
-  'Live blog feed is temporarily unavailable. Showing indexed fallback articles.';
-
 const toBlogCardPost = (post: BlogPost): BlogCardPost => ({
   id: post.id,
   slug: post.slug,
@@ -40,7 +37,6 @@ const getFallbackPosts = (category: string) =>
 export default function BlogPage() {
   const [posts, setPosts] = useState<BlogCardPost[]>([]);
   const [loading, setLoading] = useState(true);
-  const [notice, setNotice] = useState<string | null>(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const activeCategory = searchParams.get('cat') || 'all';
 
@@ -76,11 +72,9 @@ export default function BlogPage() {
 
     window.scrollTo(0, 0);
     setLoading(true);
-    setNotice(null);
 
     if (!isSupabaseConfigured) {
       setPosts(getFallbackPosts(activeCategory));
-      setNotice(FALLBACK_NOTICE);
       setLoading(false);
       return;
     }
@@ -101,7 +95,6 @@ export default function BlogPage() {
       if (queryError) {
         console.error('Blog query error:', queryError.message);
         setPosts(getFallbackPosts(activeCategory));
-        setNotice(FALLBACK_NOTICE);
         setLoading(false);
         return;
       }
@@ -150,12 +143,6 @@ export default function BlogPage() {
             </button>
           ))}
         </div>
-
-        {notice && (
-          <div className="max-w-3xl mx-auto mb-8 bg-amber-50 border border-amber-200 text-amber-900 text-sm rounded-lg px-4 py-3">
-            {notice}
-          </div>
-        )}
 
         {loading ? (
           <div className="text-center py-20">

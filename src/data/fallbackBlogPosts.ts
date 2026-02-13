@@ -23,6 +23,8 @@ const SEED_POSTS: FallbackSeed[] = [
       'Compare clinics, qualifications, and treatment pricing for dental care in Mallorca with practical guidance for expats.',
     category: 'medical',
     read_time_minutes: 18,
+    featured_image_url:
+      'https://images.pexels.com/photos/1170979/pexels-photo-1170979.jpeg?auto=compress&cs=tinysrgb&w=1200',
   },
   {
     slug: 'snoring-treatment-mallorca',
@@ -34,6 +36,8 @@ const SEED_POSTS: FallbackSeed[] = [
       'Understand common snoring causes, specialist pathways, and what to expect from assessments in Mallorca.',
     category: 'medical',
     read_time_minutes: 14,
+    featured_image_url:
+      'https://images.pexels.com/photos/3938022/pexels-photo-3938022.jpeg?auto=compress&cs=tinysrgb&w=1200',
   },
   {
     slug: 'eye-surgery-mallorca',
@@ -45,6 +49,8 @@ const SEED_POSTS: FallbackSeed[] = [
       'Compare eye care providers, treatment options, and recovery expectations for common vision procedures.',
     category: 'medical',
     read_time_minutes: 15,
+    featured_image_url:
+      'https://images.pexels.com/photos/8460157/pexels-photo-8460157.jpeg?auto=compress&cs=tinysrgb&w=1200',
   },
   {
     slug: 'pediatrician-mallorca',
@@ -56,6 +62,8 @@ const SEED_POSTS: FallbackSeed[] = [
       'A family-focused guide to pediatric services, appointment planning, and urgent care options in Mallorca.',
     category: 'medical',
     read_time_minutes: 12,
+    featured_image_url:
+      'https://images.pexels.com/photos/7089401/pexels-photo-7089401.jpeg?auto=compress&cs=tinysrgb&w=1200',
   },
   {
     slug: 'emergency-medical-services-calvia',
@@ -67,6 +75,8 @@ const SEED_POSTS: FallbackSeed[] = [
       'Know who to call, where to go, and what details to provide in a medical emergency in Calvia.',
     category: 'medical',
     read_time_minutes: 11,
+    featured_image_url:
+      'https://images.pexels.com/photos/7579831/pexels-photo-7579831.jpeg?auto=compress&cs=tinysrgb&w=1200',
   },
   {
     slug: 'best-massage-therapists-calvia',
@@ -78,6 +88,8 @@ const SEED_POSTS: FallbackSeed[] = [
       'Find sports, therapeutic, and relaxation massage options with tips on provider quality and session planning.',
     category: 'wellness',
     read_time_minutes: 10,
+    featured_image_url:
+      'https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&cs=tinysrgb&w=1200',
   },
   {
     slug: 'personal-trainers-calvia-mallorca',
@@ -89,6 +101,8 @@ const SEED_POSTS: FallbackSeed[] = [
       'Compare coaching styles, certifications, and pricing structures for personal training in Calvia.',
     category: 'wellness',
     read_time_minutes: 10,
+    featured_image_url:
+      'https://images.pexels.com/photos/3825527/pexels-photo-3825527.jpeg?auto=compress&cs=tinysrgb&w=1200',
   },
   {
     slug: 'luxury-wellness-retreats-mallorca',
@@ -100,6 +114,8 @@ const SEED_POSTS: FallbackSeed[] = [
       'Explore retreat formats, cost ranges, and planning tips for restorative wellness stays in Mallorca.',
     category: 'spa-hotels',
     read_time_minutes: 12,
+    featured_image_url:
+      'https://images.pexels.com/photos/3225531/pexels-photo-3225531.jpeg?auto=compress&cs=tinysrgb&w=1200',
   },
   {
     slug: 'diet-nutritionist-mallorca',
@@ -111,6 +127,8 @@ const SEED_POSTS: FallbackSeed[] = [
       'Practical steps for choosing a nutrition professional and building a realistic plan for long-term outcomes.',
     category: 'lifestyle',
     read_time_minutes: 9,
+    featured_image_url:
+      'https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=1200',
   },
   {
     slug: 'natural-health-shops-mallorca',
@@ -122,6 +140,8 @@ const SEED_POSTS: FallbackSeed[] = [
       'A shopper-friendly guide to natural product stores, label reading, and safe supplement selection.',
     category: 'lifestyle',
     read_time_minutes: 8,
+    featured_image_url:
+      'https://images.pexels.com/photos/5998475/pexels-photo-5998475.jpeg?auto=compress&cs=tinysrgb&w=1200',
   },
   {
     slug: 'healthy-restaurants-calvia',
@@ -133,6 +153,8 @@ const SEED_POSTS: FallbackSeed[] = [
       'Discover healthy dining options and menu strategies for balanced eating across Calvia.',
     category: 'lifestyle',
     read_time_minutes: 8,
+    featured_image_url:
+      'https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg?auto=compress&cs=tinysrgb&w=1200',
   },
   {
     slug: 'health-insurance-mallorca',
@@ -144,6 +166,8 @@ const SEED_POSTS: FallbackSeed[] = [
       'Understand policy types, network access, and common tradeoffs when choosing health insurance in Spain.',
     category: 'insurance',
     read_time_minutes: 13,
+    featured_image_url:
+      'https://images.pexels.com/photos/7176026/pexels-photo-7176026.jpeg?auto=compress&cs=tinysrgb&w=1200',
   },
   {
     slug: 'private-vs-public-health-insurance-spain',
@@ -155,6 +179,8 @@ const SEED_POSTS: FallbackSeed[] = [
       'Compare waiting times, specialist access, language support, and cost structures across systems.',
     category: 'insurance',
     read_time_minutes: 11,
+    featured_image_url:
+      'https://images.pexels.com/photos/4506105/pexels-photo-4506105.jpeg?auto=compress&cs=tinysrgb&w=1200',
   },
   {
     slug: 'health-insurance-over-65-mallorca',
@@ -166,6 +192,8 @@ const SEED_POSTS: FallbackSeed[] = [
       'A practical planning guide for older residents reviewing private insurance options in Mallorca.',
     category: 'insurance',
     read_time_minutes: 10,
+    featured_image_url:
+      'https://images.pexels.com/photos/8376292/pexels-photo-8376292.jpeg?auto=compress&cs=tinysrgb&w=1200',
   },
   {
     slug: 'top-spas-calvia',
@@ -177,6 +205,8 @@ const SEED_POSTS: FallbackSeed[] = [
       'Compare spa formats, treatment menus, and what to prioritize when booking wellness sessions.',
     category: 'spa-hotels',
     read_time_minutes: 9,
+    featured_image_url:
+      'https://images.pexels.com/photos/3845766/pexels-photo-3845766.jpeg?auto=compress&cs=tinysrgb&w=1200',
   },
   {
     slug: 'thalassotherapy-mallorca',
@@ -188,6 +218,8 @@ const SEED_POSTS: FallbackSeed[] = [
       'Learn what thalassotherapy includes, who it suits best, and how to choose reputable centers.',
     category: 'spa-hotels',
     read_time_minutes: 9,
+    featured_image_url:
+      'https://images.pexels.com/photos/6528908/pexels-photo-6528908.jpeg?auto=compress&cs=tinysrgb&w=1200',
   },
   {
     slug: 'top-boutique-hotels-mallorca',
@@ -199,6 +231,8 @@ const SEED_POSTS: FallbackSeed[] = [
       'Compare wellness-friendly boutique stays and plan a healthier, more restorative visit to Mallorca.',
     category: 'spa-hotels',
     read_time_minutes: 10,
+    featured_image_url:
+      'https://images.pexels.com/photos/8436730/pexels-photo-8436730.jpeg?auto=compress&cs=tinysrgb&w=1200',
   },
 ];
 

@@ -23,9 +23,6 @@ type BlogPostDetails = Pick<
 
 type RelatedPost = Pick<BlogPost, 'id' | 'slug' | 'title'>;
 
-const FALLBACK_NOTICE =
-  'Live article data is temporarily unavailable. Showing indexed fallback content.';
-
 const toBlogPostDetails = (post: BlogPost): BlogPostDetails => ({
   id: post.id,
   slug: post.slug,
@@ -52,7 +49,6 @@ export default function BlogPostPage() {
   const [post, setPost] = useState<BlogPostDetails | null>(null);
   const [related, setRelated] = useState<RelatedPost[]>([]);
   const [loading, setLoading] = useState(true);
-  const [notice, setNotice] = useState<string | null>(null);
 
   const blogPostingSchema = useMemo(
     () =>
@@ -96,7 +92,6 @@ export default function BlogPostPage() {
     window.scrollTo(0, 0);
     setLoading(true);
     setRelated([]);
-    setNotice(null);
 
     if (!slug) {
       setPost(null);
@@ -109,7 +104,6 @@ export default function BlogPostPage() {
       const fallbackDetails = fallbackPost ? toBlogPostDetails(fallbackPost) : null;
       setPost(fallbackDetails);
       setRelated(fallbackDetails ? getFallbackRelated(fallbackDetails) : []);
-      setNotice(fallbackDetails ? FALLBACK_NOTICE : null);
       setLoading(false);
       return;
     }
@@ -131,7 +125,6 @@ export default function BlogPostPage() {
           const fallbackDetails = fallbackPost ? toBlogPostDetails(fallbackPost) : null;
           setPost(fallbackDetails);
           setRelated(fallbackDetails ? getFallbackRelated(fallbackDetails) : []);
-          setNotice(fallbackDetails ? FALLBACK_NOTICE : null);
           setLoading(false);
           return;
         }
@@ -166,7 +159,6 @@ export default function BlogPostPage() {
         const fallbackDetails = fallbackPost ? toBlogPostDetails(fallbackPost) : null;
         setPost(fallbackDetails);
         setRelated(fallbackDetails ? getFallbackRelated(fallbackDetails) : []);
-        setNotice(fallbackDetails ? FALLBACK_NOTICE : null);
         setLoading(false);
       });
 
@@ -199,12 +191,6 @@ export default function BlogPostPage() {
   return (
     <div className="min-h-screen bg-white pt-24">
       <article className="container-narrow section-padding !pt-4">
-        {notice && (
-          <div className="max-w-3xl mx-auto mb-8 bg-amber-50 border border-amber-200 text-amber-900 text-sm rounded-lg px-4 py-3">
-            {notice}
-          </div>
-        )}
-
         <nav className="flex items-center gap-2 text-sm text-text-grey mb-8">
           <Link to="/" className="hover:text-dark-teal transition-colors">Home</Link>
           <span>/</span>
