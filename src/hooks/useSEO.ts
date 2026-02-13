@@ -6,9 +6,19 @@ interface SEOProps {
   canonical?: string;
   noindex?: boolean;
   jsonLd?: Record<string, unknown>;
+  image?: string;
+  ogType?: 'website' | 'article';
 }
 
-export function useSEO({ title, description, canonical, noindex, jsonLd }: SEOProps) {
+export function useSEO({
+  title,
+  description,
+  canonical,
+  noindex,
+  jsonLd,
+  image,
+  ogType = 'website',
+}: SEOProps) {
   useEffect(() => {
     document.title = `${title} | Calvia Health`;
 
@@ -23,37 +33,62 @@ export function useSEO({ title, description, canonical, noindex, jsonLd }: SEOPr
       el.setAttribute('content', content);
     };
 
+    const removeMeta = (name: string, property = false) => {
+      const attr = property ? 'property' : 'name';
+      const el = document.querySelector(`meta[${attr}="${name}"]`);
+      el?.remove();
+    };
+
     setMeta('description', description);
     setMeta('og:title', title, true);
     setMeta('og:description', description, true);
+    setMeta('og:type', ogType, true);
+    setMeta('twitter:card', image ? 'summary_large_image' : 'summary');
+    setMeta('twitter:title', title);
+    setMeta('twitter:description', description);
+    setMeta('robots', noindex ? 'noindex, nofollow' : 'index, follow');
 
+    const existingCanonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
     if (canonical) {
-      let link = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+      let link = existingCanonical;
       if (!link) {
         link = document.createElement('link');
         link.rel = 'canonical';
         document.head.appendChild(link);
       }
       link.href = canonical;
+      setMeta('og:url', canonical, true);
+    } else {
+      existingCanonical?.remove();
+      removeMeta('og:url', true);
     }
 
-    if (noindex) {
-      setMeta('robots', 'noindex, nofollow');
+    if (image) {
+      setMeta('og:image', image, true);
+      setMeta('twitter:image', image);
+    } else {
+      removeMeta('og:image', true);
+      removeMeta('twitter:image');
     }
+
+    const jsonLdId = 'json-ld-seo';
+    let script: HTMLScriptElement | null = null;
 
     if (jsonLd) {
-      const id = 'json-ld-seo';
-      let script = document.getElementById(id) as HTMLScriptElement | null;
+      script = document.getElementById(jsonLdId) as HTMLScriptElement | null;
       if (!script) {
         script = document.createElement('script');
-        script.id = id;
+        script.id = jsonLdId;
         script.type = 'application/ld+json';
         document.head.appendChild(script);
       }
       script.textContent = JSON.stringify(jsonLd);
-      return () => {
-        script?.remove();
-      };
+    } else {
+      document.getElementById(jsonLdId)?.remove();
     }
-  }, [title, description, canonical, noindex, jsonLd]);
+
+    return () => {
+      script?.remove();
+    };
+  }, [title, description, canonical, noindex, jsonLd, image, ogType]);
 }

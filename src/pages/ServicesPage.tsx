@@ -1,3 +1,4 @@
+import type { ComponentType } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Smile, Eye, Moon, Baby, Droplets, Hand, Dumbbell, Activity,
@@ -8,7 +9,7 @@ import { healthCategories, categoryGroups } from '../data/healthCategories';
 import { useSEO } from '../hooks/useSEO';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 
-const iconMap: Record<string, React.FC<{ className?: string }>> = {
+const iconMap: Record<string, ComponentType<{ className?: string }>> = {
   Smile, Eye, Moon, Baby, Droplets, Hand, Dumbbell, Activity,
   UtensilsCrossed, Leaf, Apple, Building2, Sunrise, Shield, Siren,
 };

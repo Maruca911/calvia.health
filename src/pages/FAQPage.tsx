@@ -1,13 +1,18 @@
-import { useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { ChevronDown, Search, ArrowRight } from 'lucide-react';
 import { useSEO } from '../hooks/useSEO';
 import { FAQ_DATA, FAQ_CATEGORIES } from '../data/faqData';
 
 export default function FAQPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '');
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+
+  useEffect(() => {
+    setSearchQuery(searchParams.get('q') || '');
+  }, [searchParams]);
 
   const faqSchema = useMemo(
     () => ({
@@ -89,7 +94,13 @@ export default function FAQPage() {
               placeholder="Search questions (e.g. vaccine, emergency, insurance...)"
               value={searchQuery}
               onChange={(e) => {
-                setSearchQuery(e.target.value);
+                const nextQuery = e.target.value;
+                setSearchQuery(nextQuery);
+                if (nextQuery.trim()) {
+                  setSearchParams({ q: nextQuery });
+                } else {
+                  setSearchParams({});
+                }
                 setOpenIndex(null);
               }}
               className="w-full pl-12 pr-4 py-3 border border-subtle-grey/40 rounded-xl text-text-dark placeholder:text-text-grey/60 focus:outline-none focus:ring-2 focus:ring-dark-teal/30 focus:border-dark-teal transition-all"
@@ -136,6 +147,7 @@ export default function FAQPage() {
               <button
                 onClick={() => {
                   setSearchQuery('');
+                  setSearchParams({});
                   setActiveCategory(null);
                 }}
                 className="mt-4 text-dark-teal font-medium hover:text-dark-teal-light transition-colors"

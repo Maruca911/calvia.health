@@ -95,7 +95,7 @@ export default function UnifiedMatchForm() {
     }
     setSubmitting(true);
     try {
-      await supabase.from('health_leads').insert({
+      const { error } = await supabase.from('health_leads').insert({
         form_type: 'unified',
         category: form.needs[0] || 'general',
         user_contact: {
@@ -113,6 +113,7 @@ export default function UnifiedMatchForm() {
         budget_range: form.budgetRange,
         timeline: form.timeline,
       });
+      if (error) throw error;
       navigate('/thank-you');
     } catch {
       setErrors({ submit: 'Something went wrong. Please try again.' });

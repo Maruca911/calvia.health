@@ -1,52 +1,178 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Clock, ArrowLeft, ArrowRight, Share2 } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { isSupabaseConfigured, supabase } from '../lib/supabase';
+import { FALLBACK_BLOG_POSTS } from '../data/fallbackBlogPosts';
 import { useSEO } from '../hooks/useSEO';
 import type { BlogPost } from '../types';
 
+type BlogPostDetails = Pick<
+  BlogPost,
+  | 'id'
+  | 'slug'
+  | 'title'
+  | 'meta_description'
+  | 'focus_keyword'
+  | 'content'
+  | 'featured_image_url'
+  | 'featured_image_alt'
+  | 'category'
+  | 'read_time_minutes'
+  | 'published_at'
+>;
+
+type RelatedPost = Pick<BlogPost, 'id' | 'slug' | 'title'>;
+
+const FALLBACK_NOTICE =
+  'Live article data is temporarily unavailable. Showing indexed fallback content.';
+
+const toBlogPostDetails = (post: BlogPost): BlogPostDetails => ({
+  id: post.id,
+  slug: post.slug,
+  title: post.title,
+  meta_description: post.meta_description,
+  focus_keyword: post.focus_keyword,
+  content: post.content,
+  featured_image_url: post.featured_image_url,
+  featured_image_alt: post.featured_image_alt,
+  category: post.category,
+  read_time_minutes: post.read_time_minutes,
+  published_at: post.published_at,
+});
+
+const getFallbackPost = (slug: string) => FALLBACK_BLOG_POSTS.find((post) => post.slug === slug) || null;
+
+const getFallbackRelated = (post: BlogPostDetails): RelatedPost[] =>
+  FALLBACK_BLOG_POSTS.filter((item) => item.category === post.category && item.slug !== post.slug)
+    .slice(0, 3)
+    .map((item) => ({ id: item.id, slug: item.slug, title: item.title }));
+
 export default function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
-  const [post, setPost] = useState<BlogPost | null>(null);
-  const [related, setRelated] = useState<BlogPost[]>([]);
+  const [post, setPost] = useState<BlogPostDetails | null>(null);
+  const [related, setRelated] = useState<RelatedPost[]>([]);
   const [loading, setLoading] = useState(true);
+  const [notice, setNotice] = useState<string | null>(null);
+
+  const blogPostingSchema = useMemo(
+    () =>
+      post
+        ? {
+            '@context': 'https://schema.org',
+            '@type': 'BlogPosting',
+            headline: post.title,
+            description: post.meta_description,
+            image: post.featured_image_url || undefined,
+            articleSection: post.category,
+            datePublished: post.published_at,
+            dateModified: post.published_at,
+            mainEntityOfPage: `https://www.calvia.health/blog/${post.slug}`,
+            publisher: {
+              '@type': 'Organization',
+              name: 'Calvia Health',
+              url: 'https://www.calvia.health',
+              logo: {
+                '@type': 'ImageObject',
+                url: 'https://www.calvia.health/favicon.svg',
+              },
+            },
+          }
+        : undefined,
+    [post]
+  );
 
   useSEO({
     title: post?.title || 'Loading...',
     description: post?.meta_description || '',
     canonical: post ? `https://www.calvia.health/blog/${post.slug}` : undefined,
+    jsonLd: blogPostingSchema,
+    image: post?.featured_image_url || undefined,
+    ogType: 'article',
   });
 
   useEffect(() => {
+    let ignore = false;
+
     window.scrollTo(0, 0);
     setLoading(true);
+    setRelated([]);
+    setNotice(null);
+
+    if (!slug) {
+      setPost(null);
+      setLoading(false);
+      return;
+    }
+
+    if (!isSupabaseConfigured) {
+      const fallbackPost = getFallbackPost(slug);
+      const fallbackDetails = fallbackPost ? toBlogPostDetails(fallbackPost) : null;
+      setPost(fallbackDetails);
+      setRelated(fallbackDetails ? getFallbackRelated(fallbackDetails) : []);
+      setNotice(fallbackDetails ? FALLBACK_NOTICE : null);
+      setLoading(false);
+      return;
+    }
 
     supabase
       .from('blog_posts')
-      .select('*')
+      .select('id,slug,title,meta_description,focus_keyword,content,featured_image_url,featured_image_alt,category,read_time_minutes,published_at')
       .eq('slug', slug)
       .eq('published', true)
       .maybeSingle()
       .then(({ data, error: queryError }) => {
-        if (queryError) {
-          console.error('Blog post query error:', queryError.message);
+        if (ignore) return;
+
+        if (queryError || !data) {
+          if (queryError) {
+            console.error('Blog post query error:', queryError.message);
+          }
+          const fallbackPost = getFallbackPost(slug);
+          const fallbackDetails = fallbackPost ? toBlogPostDetails(fallbackPost) : null;
+          setPost(fallbackDetails);
+          setRelated(fallbackDetails ? getFallbackRelated(fallbackDetails) : []);
+          setNotice(fallbackDetails ? FALLBACK_NOTICE : null);
+          setLoading(false);
+          return;
         }
-        setPost(data);
+
+        const postDetails = data as BlogPostDetails;
+        setPost(postDetails);
         setLoading(false);
 
-        if (data) {
-          supabase
-            .from('blog_posts')
-            .select('*')
-            .eq('published', true)
-            .eq('category', data.category)
-            .neq('slug', data.slug)
-            .limit(3)
-            .then(({ data: relatedData }) => {
-              setRelated(relatedData || []);
-            });
+        supabase
+          .from('blog_posts')
+          .select('id,slug,title')
+          .eq('published', true)
+          .eq('category', data.category)
+          .neq('slug', data.slug)
+          .limit(3)
+          .then(({ data: relatedData, error: relatedError }) => {
+            if (ignore) return;
+            if (relatedError) {
+              console.error('Related post query error:', relatedError.message);
+              setRelated(getFallbackRelated(postDetails));
+              return;
+            }
+            setRelated((relatedData as RelatedPost[]) || []);
+          });
+      })
+      .catch((queryError) => {
+        if (ignore) return;
+        if (queryError instanceof Error) {
+          console.error('Blog post query error:', queryError.message);
         }
+        const fallbackPost = getFallbackPost(slug);
+        const fallbackDetails = fallbackPost ? toBlogPostDetails(fallbackPost) : null;
+        setPost(fallbackDetails);
+        setRelated(fallbackDetails ? getFallbackRelated(fallbackDetails) : []);
+        setNotice(fallbackDetails ? FALLBACK_NOTICE : null);
+        setLoading(false);
       });
+
+    return () => {
+      ignore = true;
+    };
   }, [slug]);
 
   if (loading) {
@@ -73,6 +199,12 @@ export default function BlogPostPage() {
   return (
     <div className="min-h-screen bg-white pt-24">
       <article className="container-narrow section-padding !pt-4">
+        {notice && (
+          <div className="max-w-3xl mx-auto mb-8 bg-amber-50 border border-amber-200 text-amber-900 text-sm rounded-lg px-4 py-3">
+            {notice}
+          </div>
+        )}
+
         <nav className="flex items-center gap-2 text-sm text-text-grey mb-8">
           <Link to="/" className="hover:text-dark-teal transition-colors">Home</Link>
           <span>/</span>

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Stethoscope, Sparkles, Salad, Hotel, ShieldCheck } from 'lucide-react';
-import { supabase } from '../../lib/supabase';
+import { isSupabaseConfigured, supabase } from '../../lib/supabase';
+import { FALLBACK_BLOG_POSTS } from '../../data/fallbackBlogPosts';
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 
 const BLOG_CATEGORIES = [
@@ -52,19 +53,46 @@ export default function BlogPreview() {
   const { ref, isVisible } = useIntersectionObserver(0.05);
 
   useEffect(() => {
+    const setFallbackCounts = () => {
+      const grouped: Record<string, number> = {};
+      FALLBACK_BLOG_POSTS.forEach((row) => {
+        grouped[row.category] = (grouped[row.category] || 0) + 1;
+      });
+      setCounts(grouped);
+    };
+
+    if (!isSupabaseConfigured) {
+      setFallbackCounts();
+      return;
+    }
+
+    let ignore = false;
+
     supabase
       .from('blog_posts')
       .select('category')
       .eq('published', true)
       .then(({ data, error }) => {
-        if (error) console.error('BlogPreview query error:', error.message);
-        if (!data) return;
+        if (ignore) return;
+        if (error) {
+          console.error('BlogPreview query error:', error.message);
+          setFallbackCounts();
+          return;
+        }
+        if (!data) {
+          setFallbackCounts();
+          return;
+        }
         const grouped: Record<string, number> = {};
         (data as { category: string }[]).forEach((row) => {
           grouped[row.category] = (grouped[row.category] || 0) + 1;
         });
         setCounts(grouped);
       });
+
+    return () => {
+      ignore = true;
+    };
   }, []);
 
   return (

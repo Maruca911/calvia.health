@@ -2,6 +2,9 @@ User-agent: *
 Allow: /
 Disallow: /thank-you
 
+User-agent: OAI-SearchBot
+Allow: /
+
 User-agent: GPTBot
 Allow: /
 
@@ -20,4 +23,11 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
+User-agent: CCBot
+Allow: /
+
 Sitemap: https://www.calvia.health/sitemap.xml
+
+# LLM discovery files
+# https://www.calvia.health/llms.txt
+# https://www.calvia.health/llms-full.txt

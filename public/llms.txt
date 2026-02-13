@@ -1,0 +1,25 @@
+# Calvia Health
+
+Calvia Health is a health-service matching platform for residents and visitors in Calvia, Mallorca.
+We help users find vetted providers across medical, wellness, lifestyle, insurance, and spa/hotel categories.
+
+## Canonical Site
+- https://www.calvia.health/
+
+## Core Pages
+- Home: https://www.calvia.health/
+- Services: https://www.calvia.health/services
+- About: https://www.calvia.health/about
+- Blog: https://www.calvia.health/blog
+- FAQ: https://www.calvia.health/faq
+- Get Matched: https://www.calvia.health/get-matched
+
+## Data & Discovery
+- Sitemap: https://www.calvia.health/sitemap.xml
+- Extended LLM Index: https://www.calvia.health/llms-full.txt
+
+## Usage Notes
+- Content is informational only and not medical advice.
+- For emergencies in Spain, call 112.
+- Last reviewed: 2026-02-13
+

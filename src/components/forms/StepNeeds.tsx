@@ -1,3 +1,4 @@
+import type { ComponentType } from 'react';
 import {
   Smile, Eye, Moon, Baby, Droplets, Hand, Dumbbell, Activity,
   UtensilsCrossed, Leaf, Apple, Building2, Sunrise, Shield, Siren,
@@ -5,7 +6,7 @@ import {
 import { healthCategories } from '../../data/healthCategories';
 import type { LeadFormData } from '../../types';
 
-const iconMap: Record<string, React.FC<{ className?: string }>> = {
+const iconMap: Record<string, ComponentType<{ className?: string }>> = {
   Smile, Eye, Moon, Baby, Droplets, Hand, Dumbbell, Activity,
   UtensilsCrossed, Leaf, Apple, Building2, Sunrise, Shield, Siren,
 };

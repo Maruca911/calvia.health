@@ -1,12 +1,18 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CheckCircle, MessageCircle, Clock, ArrowRight } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { isSupabaseConfigured, supabase } from '../lib/supabase';
+import { FALLBACK_BLOG_POSTS } from '../data/fallbackBlogPosts';
 import { useSEO } from '../hooks/useSEO';
 import type { BlogPost } from '../types';
 
+type SuggestedPost = Pick<
+  BlogPost,
+  'id' | 'slug' | 'title' | 'featured_image_url' | 'featured_image_alt' | 'read_time_minutes'
+>;
+
 export default function ThankYouPage() {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [posts, setPosts] = useState<SuggestedPost[]>([]);
 
   useSEO({
     title: 'Thank You',
@@ -15,16 +21,43 @@ export default function ThankYouPage() {
   });
 
   useEffect(() => {
+    const fallbackPosts = FALLBACK_BLOG_POSTS.slice(0, 3).map((post) => ({
+      id: post.id,
+      slug: post.slug,
+      title: post.title,
+      featured_image_url: post.featured_image_url,
+      featured_image_alt: post.featured_image_alt,
+      read_time_minutes: post.read_time_minutes,
+    }));
+
+    if (!isSupabaseConfigured) {
+      setPosts(fallbackPosts);
+      return;
+    }
+
+    let ignore = false;
+
     window.scrollTo(0, 0);
     supabase
       .from('blog_posts')
-      .select('*')
+      .select('id,slug,title,featured_image_url,featured_image_alt,read_time_minutes')
       .eq('published', true)
       .order('published_at', { ascending: false })
       .limit(3)
-      .then(({ data }) => {
-        if (data) setPosts(data);
+      .then(({ data, error }) => {
+        if (ignore) return;
+        if (error) {
+          console.error('Thank you blog query error:', error.message);
+          setPosts(fallbackPosts);
+          return;
+        }
+        const parsed = (data as SuggestedPost[]) || [];
+        setPosts(parsed.length > 0 ? parsed : fallbackPosts);
       });
+
+    return () => {
+      ignore = true;
+    };
   }, []);
 
   return (

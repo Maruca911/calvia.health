@@ -1,9 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { Clock, ArrowRight, Search } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { isSupabaseConfigured, supabase } from '../lib/supabase';
+import { FALLBACK_BLOG_POSTS } from '../data/fallbackBlogPosts';
 import { useSEO } from '../hooks/useSEO';
 import type { BlogPost } from '../types';
+
+type BlogCardPost = Pick<
+  BlogPost,
+  'id' | 'slug' | 'title' | 'excerpt' | 'featured_image_url' | 'featured_image_alt' | 'category' | 'read_time_minutes'
+>;
 
 const CATEGORIES = [
   { id: 'all', label: 'All' },
@@ -14,25 +20,74 @@ const CATEGORIES = [
   { id: 'spa-hotels', label: 'Spas & Hotels' },
 ];
 
+const FALLBACK_NOTICE =
+  'Live blog feed is temporarily unavailable. Showing indexed fallback articles.';
+
+const toBlogCardPost = (post: BlogPost): BlogCardPost => ({
+  id: post.id,
+  slug: post.slug,
+  title: post.title,
+  excerpt: post.excerpt,
+  featured_image_url: post.featured_image_url,
+  featured_image_alt: post.featured_image_alt,
+  category: post.category,
+  read_time_minutes: post.read_time_minutes,
+});
+
+const getFallbackPosts = (category: string) =>
+  FALLBACK_BLOG_POSTS.filter((post) => category === 'all' || post.category === category).map(toBlogCardPost);
+
 export default function BlogPage() {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [posts, setPosts] = useState<BlogCardPost[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const activeCategory = searchParams.get('cat') || 'all';
+
+  const blogSchema = useMemo(
+    () => ({
+      '@context': 'https://schema.org',
+      '@type': 'Blog',
+      name: 'Calvia Health Blog',
+      url: 'https://www.calvia.health/blog',
+      inLanguage: 'en',
+      blogPost: posts.map((post) => ({
+        '@type': 'BlogPosting',
+        headline: post.title,
+        url: `https://www.calvia.health/blog/${post.slug}`,
+        articleSection: post.category,
+        image: post.featured_image_url || undefined,
+      })),
+    }),
+    [posts]
+  );
 
   useSEO({
     title: 'Blog - Expert Health Guides for Mallorca',
     description: 'Read expert guides on health services in Calvia and Mallorca. Dentists, spas, wellness retreats, insurance, and more.',
     canonical: 'https://www.calvia.health/blog',
+    jsonLd: blogSchema,
+    image:
+      'https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg?auto=compress&cs=tinysrgb&w=1200',
   });
 
   useEffect(() => {
+    let ignore = false;
+
     window.scrollTo(0, 0);
     setLoading(true);
+    setNotice(null);
+
+    if (!isSupabaseConfigured) {
+      setPosts(getFallbackPosts(activeCategory));
+      setNotice(FALLBACK_NOTICE);
+      setLoading(false);
+      return;
+    }
+
     let query = supabase
       .from('blog_posts')
-      .select('*')
+      .select('id,slug,title,excerpt,featured_image_url,featured_image_alt,category,read_time_minutes')
       .eq('published', true)
       .order('published_at', { ascending: false });
 
@@ -41,15 +96,23 @@ export default function BlogPage() {
     }
 
     query.then(({ data, error: queryError }) => {
+      if (ignore) return;
+
       if (queryError) {
-        setError('Unable to load articles. Please try again later.');
         console.error('Blog query error:', queryError.message);
-      } else {
-        setError(null);
+        setPosts(getFallbackPosts(activeCategory));
+        setNotice(FALLBACK_NOTICE);
+        setLoading(false);
+        return;
       }
-      setPosts(data || []);
+
+      setPosts((data as BlogCardPost[]) || []);
       setLoading(false);
     });
+
+    return () => {
+      ignore = true;
+    };
   }, [activeCategory]);
 
   const setCategory = (cat: string) => {
@@ -88,16 +151,15 @@ export default function BlogPage() {
           ))}
         </div>
 
+        {notice && (
+          <div className="max-w-3xl mx-auto mb-8 bg-amber-50 border border-amber-200 text-amber-900 text-sm rounded-lg px-4 py-3">
+            {notice}
+          </div>
+        )}
+
         {loading ? (
           <div className="text-center py-20">
             <div className="w-8 h-8 border-2 border-sky-blue border-t-transparent rounded-full animate-spin mx-auto" />
-          </div>
-        ) : error ? (
-          <div className="text-center py-20">
-            <p className="text-red-600 mb-4">{error}</p>
-            <button onClick={() => window.location.reload()} className="btn-secondary text-sm">
-              Try Again
-            </button>
           </div>
         ) : posts.length === 0 ? (
           <div className="text-center py-20">
