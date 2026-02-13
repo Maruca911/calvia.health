@@ -3,9 +3,9 @@
   publish = "dist"
 
 [build.environment]
-  VITE_SUPABASE_URL = "https://bxhxkjznqqysuqcrogwz.supabase.co"
+  VITE_SUPABASE_URL = "https://fixzgwtrnyvosjmbhqts.supabase.co"
   # Public/publishable key used client-side (safe to expose; enforced by RLS).
-  VITE_SUPABASE_ANON_KEY = "sb_publishable_2kDEj_0hzEYy29V1UMuqnQ_qGZFJdKb"
+  VITE_SUPABASE_ANON_KEY = "sb_publishable_8rNk38qUUDAZlKMGiKvB0w_Rtf74KfM"
 
 [[headers]]
   for = "/robots.txt"
