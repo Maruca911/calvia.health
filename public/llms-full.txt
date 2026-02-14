@@ -18,12 +18,14 @@ This file provides an expanded machine-readable index of Calvia Health pages for
 
 ## Blog URLs
 - https://www.calvia.health/blog/best-dentist-mallorca
+- https://www.calvia.health/blog/pharmacies-calvia
 - https://www.calvia.health/blog/snoring-treatment-mallorca
 - https://www.calvia.health/blog/eye-surgery-mallorca
 - https://www.calvia.health/blog/pediatrician-mallorca
 - https://www.calvia.health/blog/emergency-medical-services-calvia
 - https://www.calvia.health/blog/best-massage-therapists-calvia
 - https://www.calvia.health/blog/personal-trainers-calvia-mallorca
+- https://www.calvia.health/blog/gyms-fitness-calvia
 - https://www.calvia.health/blog/luxury-wellness-retreats-mallorca
 - https://www.calvia.health/blog/diet-nutritionist-mallorca
 - https://www.calvia.health/blog/natural-health-shops-mallorca
@@ -45,4 +47,3 @@ This file provides an expanded machine-readable index of Calvia Health pages for
 - Medical decisions should be made with licensed professionals.
 - For emergencies in Spain, call 112.
 - Last reviewed: 2026-02-13
-

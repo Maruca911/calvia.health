@@ -27,6 +27,19 @@ const SEED_POSTS: FallbackSeed[] = [
       'https://images.pexels.com/photos/1170979/pexels-photo-1170979.jpeg?auto=compress&cs=tinysrgb&w=1200',
   },
   {
+    slug: 'pharmacies-calvia',
+    title: 'Pharmacies in Calvia: Where to Go and How It Works',
+    meta_description:
+      'How pharmacies work in Calvia, Mallorca: prescriptions, over-the-counter medicines, farmacias de guardia, and where to go in Santa Ponsa, Palmanova, Portals Nous, and Peguera.',
+    focus_keyword: 'pharmacies in calvia mallorca',
+    excerpt:
+      'A practical guide to prescriptions, after-hours pharmacies, and where to get help fast in Calvia, Mallorca.',
+    category: 'medical',
+    read_time_minutes: 10,
+    featured_image_url:
+      'https://images.pexels.com/photos/3683108/pexels-photo-3683108.jpeg?auto=compress&cs=tinysrgb&w=1200',
+  },
+  {
     slug: 'snoring-treatment-mallorca',
     title: 'Snoring Treatment in Mallorca',
     meta_description:
@@ -103,6 +116,19 @@ const SEED_POSTS: FallbackSeed[] = [
     read_time_minutes: 10,
     featured_image_url:
       'https://images.pexels.com/photos/3825527/pexels-photo-3825527.jpeg?auto=compress&cs=tinysrgb&w=1200',
+  },
+  {
+    slug: 'gyms-fitness-calvia',
+    title: 'Gyms and Fitness Centres in Calvia',
+    meta_description:
+      'Find gyms and fitness centres in Calvia, Mallorca: Santa Ponsa, Palmanova, Magaluf, and Portals Nous. Day passes, classes, pricing, and how to choose.',
+    focus_keyword: 'gyms in calvia mallorca',
+    excerpt:
+      'A local guide to gyms, CrossFit boxes, boutique studios, and municipal sports centres in Calvia, Mallorca.',
+    category: 'wellness',
+    read_time_minutes: 11,
+    featured_image_url:
+      'https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=1200',
   },
   {
     slug: 'luxury-wellness-retreats-mallorca',
