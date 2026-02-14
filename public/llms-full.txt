@@ -3,44 +3,44 @@
 This file provides an expanded machine-readable index of Calvia Health pages for AI retrieval systems.
 
 ## Site Scope
-- Domain: https://www.calvia.health
+- Domain: https://calvia.health
 - Primary language: English
 - Region focus: Calvia, Mallorca, Spain
 - Content types: service pages, FAQ, blog guides
 
 ## Core Pages
-- https://www.calvia.health/
-- https://www.calvia.health/services
-- https://www.calvia.health/about
-- https://www.calvia.health/blog
-- https://www.calvia.health/faq
-- https://www.calvia.health/get-matched
+- https://calvia.health/
+- https://calvia.health/services
+- https://calvia.health/about
+- https://calvia.health/blog
+- https://calvia.health/faq
+- https://calvia.health/get-matched
 
 ## Blog URLs
-- https://www.calvia.health/blog/best-dentist-mallorca
-- https://www.calvia.health/blog/pharmacies-calvia
-- https://www.calvia.health/blog/snoring-treatment-mallorca
-- https://www.calvia.health/blog/eye-surgery-mallorca
-- https://www.calvia.health/blog/pediatrician-mallorca
-- https://www.calvia.health/blog/emergency-medical-services-calvia
-- https://www.calvia.health/blog/best-massage-therapists-calvia
-- https://www.calvia.health/blog/personal-trainers-calvia-mallorca
-- https://www.calvia.health/blog/gyms-fitness-calvia
-- https://www.calvia.health/blog/luxury-wellness-retreats-mallorca
-- https://www.calvia.health/blog/diet-nutritionist-mallorca
-- https://www.calvia.health/blog/natural-health-shops-mallorca
-- https://www.calvia.health/blog/healthy-restaurants-calvia
-- https://www.calvia.health/blog/health-insurance-mallorca
-- https://www.calvia.health/blog/private-vs-public-health-insurance-spain
-- https://www.calvia.health/blog/health-insurance-over-65-mallorca
-- https://www.calvia.health/blog/top-spas-calvia
-- https://www.calvia.health/blog/thalassotherapy-mallorca
-- https://www.calvia.health/blog/top-boutique-hotels-mallorca
+- https://calvia.health/blog/best-dentist-mallorca
+- https://calvia.health/blog/pharmacies-calvia
+- https://calvia.health/blog/snoring-treatment-mallorca
+- https://calvia.health/blog/eye-surgery-mallorca
+- https://calvia.health/blog/pediatrician-mallorca
+- https://calvia.health/blog/emergency-medical-services-calvia
+- https://calvia.health/blog/best-massage-therapists-calvia
+- https://calvia.health/blog/personal-trainers-calvia-mallorca
+- https://calvia.health/blog/gyms-fitness-calvia
+- https://calvia.health/blog/luxury-wellness-retreats-mallorca
+- https://calvia.health/blog/diet-nutritionist-mallorca
+- https://calvia.health/blog/natural-health-shops-mallorca
+- https://calvia.health/blog/healthy-restaurants-calvia
+- https://calvia.health/blog/health-insurance-mallorca
+- https://calvia.health/blog/private-vs-public-health-insurance-spain
+- https://calvia.health/blog/health-insurance-over-65-mallorca
+- https://calvia.health/blog/top-spas-calvia
+- https://calvia.health/blog/thalassotherapy-mallorca
+- https://calvia.health/blog/top-boutique-hotels-mallorca
 
 ## Structured Sources
-- XML sitemap: https://www.calvia.health/sitemap.xml
-- Robots rules: https://www.calvia.health/robots.txt
-- Compact LLM index: https://www.calvia.health/llms.txt
+- XML sitemap: https://calvia.health/sitemap.xml
+- Robots rules: https://calvia.health/robots.txt
+- Compact LLM index: https://calvia.health/llms.txt
 
 ## Important Notes
 - This website is an informational matching service and not a medical provider.

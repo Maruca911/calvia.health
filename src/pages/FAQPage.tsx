@@ -34,7 +34,7 @@ export default function FAQPage() {
     title: 'FAQ - Health in Calvia & Mallorca Guide for Tourists and Residents (2026)',
     description:
       'Comprehensive FAQ covering vaccines, emergencies, doctors, insurance, allergies, wellness, and safety tips for tourists and residents in Calvia and Mallorca. Updated for 2026.',
-    canonical: 'https://www.calvia.health/faq',
+    canonical: 'https://calvia.health/faq',
     jsonLd: faqSchema,
   });
 

@@ -12,7 +12,7 @@ export default function GetMatchedPage() {
   useSEO({
     title: 'Find Your Health Expert in Calvia',
     description: 'Answer a few quick questions and get matched with 2-3 trusted health professionals in Calvia, Mallorca. Free, fast, and private.',
-    canonical: 'https://www.calvia.health/get-matched',
+    canonical: 'https://calvia.health/get-matched',
   });
 
   return (

@@ -62,14 +62,14 @@ export default function BlogPostPage() {
             articleSection: post.category,
             datePublished: post.published_at,
             dateModified: post.published_at,
-            mainEntityOfPage: `https://www.calvia.health/blog/${post.slug}`,
+            mainEntityOfPage: `https://calvia.health/blog/${post.slug}`,
             publisher: {
               '@type': 'Organization',
               name: 'Calvia Health',
-              url: 'https://www.calvia.health',
+              url: 'https://calvia.health',
               logo: {
                 '@type': 'ImageObject',
-                url: 'https://www.calvia.health/favicon.svg',
+                url: 'https://calvia.health/favicon.svg',
               },
             },
           }
@@ -80,7 +80,7 @@ export default function BlogPostPage() {
   useSEO({
     title: post?.title || 'Loading...',
     description: post?.meta_description || '',
-    canonical: post ? `https://www.calvia.health/blog/${post.slug}` : undefined,
+    canonical: post ? `https://calvia.health/blog/${post.slug}` : undefined,
     jsonLd: blogPostingSchema,
     image: post?.featured_image_url || undefined,
     ogType: 'article',
@@ -186,7 +186,7 @@ export default function BlogPostPage() {
     );
   }
 
-  const shareUrl = `https://www.calvia.health/blog/${post.slug}`;
+  const shareUrl = `https://calvia.health/blog/${post.slug}`;
 
   return (
     <div className="min-h-screen bg-white pt-24">

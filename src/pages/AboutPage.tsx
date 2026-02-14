@@ -90,7 +90,7 @@ export default function AboutPage() {
   useSEO({
     title: 'About Calvia Health - Part of the Calvia Group Ecosystem',
     description: 'Learn about Calvia Health and the Calvia Group ecosystem -- premium digital tools for residents of Calvia, Mallorca.',
-    canonical: 'https://www.calvia.health/about',
+    canonical: 'https://calvia.health/about',
   });
 
   return (

@@ -28,7 +28,7 @@ export default function ServicesPage() {
   useSEO({
     title: 'Health & Wellness Services in Calvia, Mallorca',
     description: 'Explore all health, wellness, and lifestyle services available through Calvia Health. From dentists to wellness retreats.',
-    canonical: 'https://www.calvia.health/services',
+    canonical: 'https://calvia.health/services',
   });
 
   return (

@@ -31,7 +31,7 @@ export default function HomePage() {
     title: 'Trusted Health Services in Calvia, Mallorca',
     description:
       'Find top health services in Calvia, Mallorca. Immediate expert matches for snoring, eyes, dentistry, pediatric care, spas, fitness, and more.',
-    canonical: 'https://www.calvia.health/',
+    canonical: 'https://calvia.health/',
     jsonLd: faqSchema,
   });
 

@@ -26,8 +26,8 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
-Sitemap: https://www.calvia.health/sitemap.xml
+Sitemap: https://calvia.health/sitemap.xml
 
 # LLM discovery files
-# https://www.calvia.health/llms.txt
-# https://www.calvia.health/llms-full.txt
+# https://calvia.health/llms.txt
+# https://calvia.health/llms-full.txt

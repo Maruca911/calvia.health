@@ -45,12 +45,12 @@ export default function BlogPage() {
       '@context': 'https://schema.org',
       '@type': 'Blog',
       name: 'Calvia Health Blog',
-      url: 'https://www.calvia.health/blog',
+      url: 'https://calvia.health/blog',
       inLanguage: 'en',
       blogPost: posts.map((post) => ({
         '@type': 'BlogPosting',
         headline: post.title,
-        url: `https://www.calvia.health/blog/${post.slug}`,
+        url: `https://calvia.health/blog/${post.slug}`,
         articleSection: post.category,
         image: post.featured_image_url || undefined,
       })),
@@ -61,7 +61,7 @@ export default function BlogPage() {
   useSEO({
     title: 'Blog - Expert Health Guides for Mallorca',
     description: 'Read expert guides on health services in Calvia and Mallorca. Dentists, spas, wellness retreats, insurance, and more.',
-    canonical: 'https://www.calvia.health/blog',
+    canonical: 'https://calvia.health/blog',
     jsonLd: blogSchema,
     image:
       'https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg?auto=compress&cs=tinysrgb&w=1200',
